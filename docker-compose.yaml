@@ -1,0 +1,19 @@
+services:
+  logisim:
+    build:
+      context: .
+      args:
+        LOGISIM_VERSION: "3.9.0"
+    image: logisim-evolution:3.9.0
+    container_name: logisim-evolution
+    init: true
+    shm_size: "256m"
+    environment:
+      RESOLUTION: "1600x900"   # resolución del escritorio virtual
+    ports:
+      # Solo accesible desde tu propio computador (sin contraseña VNC)
+      - "127.0.0.1:6080:6080"
+    volumes:
+      # Tus circuitos (.circ) se guardan aquí y no se pierden al apagar el contenedor
+      - ./circuitos:/workspace
+    restart: "no"
